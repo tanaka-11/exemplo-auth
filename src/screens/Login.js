@@ -1,4 +1,4 @@
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 import { useState } from "react";
 
 // Importação dos recursos de autenticação
@@ -11,22 +11,31 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  // Função de Login
+  const login = async () => {
+    if (!email || !senha) {
+      Alert.alert("Ops!", "Preencha todos os campos");
+      return;
+    }
+    console.log(email, senha);
+  };
+
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
         <TextInput
-          onChangeText={(valor) => setEmail}
+          onChangeText={(valor) => setEmail(valor)}
           placeholder="E-mail"
           style={estilos.input}
         />
         <TextInput
-          onChangeText={(valor) => setSenha}
+          onChangeText={(valor) => setSenha(valor)}
           placeholder="Senha"
           style={estilos.input}
           secureTextEntry
         />
         <View style={estilos.botoes}>
-          <Button title="Entre" color="green" />
+          <Button onPress={login} title="Entre" color="green" />
         </View>
       </View>
     </View>
