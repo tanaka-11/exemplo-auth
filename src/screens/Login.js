@@ -1,4 +1,10 @@
 import { Button, StyleSheet, TextInput, View } from "react-native";
+import { useState } from "react";
+
+// Importação dos recursos de autenticação
+import { auth } from "../../firebase.config";
+// Importação da função de login com email e senha
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   return (
