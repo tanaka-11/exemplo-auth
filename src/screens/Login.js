@@ -7,11 +7,24 @@ import { auth } from "../../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
+  // State de Email e Senha
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
-        <TextInput placeholder="E-mail" style={estilos.input} />
-        <TextInput placeholder="Senha" style={estilos.input} secureTextEntry />
+        <TextInput
+          onChangeText={(valor) => setEmail}
+          placeholder="E-mail"
+          style={estilos.input}
+        />
+        <TextInput
+          onChangeText={(valor) => setEmail}
+          placeholder="Senha"
+          style={estilos.input}
+          secureTextEntry
+        />
         <View style={estilos.botoes}>
           <Button title="Entre" color="green" />
         </View>
