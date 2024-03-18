@@ -20,7 +20,7 @@ export default function Login() {
           style={estilos.input}
         />
         <TextInput
-          onChangeText={(valor) => setEmail}
+          onChangeText={(valor) => setSenha}
           placeholder="Senha"
           style={estilos.input}
           secureTextEntry
