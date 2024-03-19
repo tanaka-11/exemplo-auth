@@ -4,7 +4,11 @@ export default function Cadastro({ navigation }) {
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
-        <TextInput placeholder="E-mail" style={estilos.input} />
+        <TextInput
+          placeholder="E-mail"
+          style={estilos.input}
+          keyboardType="email-address"
+        />
         <TextInput placeholder="Senha" style={estilos.input} secureTextEntry />
         <View style={estilos.botoes}>
           <Button title="Cadastre-se" color="blue" />
