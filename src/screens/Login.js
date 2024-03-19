@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
           break;
       }
       Alert.alert("Ops!", mensagem);
-    }
+    } // Tratativa de mensagem para usuario de erros possiveis
   };
 
   return (
