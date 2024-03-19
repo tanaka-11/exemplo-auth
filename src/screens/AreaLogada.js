@@ -3,7 +3,7 @@ import { auth } from "../../firebase.config"; // Recursos de autenticação
 import { signOut } from "firebase/auth"; // Função do firebase para logout
 
 export default function AreaLogada({ navigation }) {
-  // Acessando dados do usuario logado
+  // Acessando dados do usuario logado atraves do currentUser
   console.log(auth.currentUser);
 
   // Extraindo a propriedade de email do currentUser
@@ -12,8 +12,8 @@ export default function AreaLogada({ navigation }) {
   // Função de logout
   const logout = async () => {
     try {
-      await signOut(auth);
-      navigation.replace("Inicial");
+      await signOut(auth); // Chamada da função com unico parametro de autenticação
+      navigation.replace("Inicial"); // Voltando para pagina inicial
     } catch (error) {
       console.error(error);
     }
