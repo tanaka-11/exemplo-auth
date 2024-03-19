@@ -45,13 +45,13 @@ export default function Cadastro({ navigation }) {
       let mensagem;
       switch (error.code) {
         case "auth/email-already-in-use":
-          mensagem = "E-mail em uso";
+          mensagem = "E-mail já cadastrado";
           break;
         case "auth/invalid-email":
           mensagem = "Endereço de e-mail inválido";
           break;
         case "auth/weak-password":
-          mensagem = "Tente uma senha maior";
+          mensagem = "Senha fraca (mínimo de 6 caracteres)";
           break;
         default:
           mensagem = "Houve um erro, tente novamente";
