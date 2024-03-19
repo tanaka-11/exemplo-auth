@@ -7,6 +7,7 @@ export default function AreaLogada() {
         <Text style={estilos.bemVindo}>Bem-vindo(a)</Text>
         <Button title="Logout" color="#D35400" />
       </View>
+
       <View style={estilos.geral}>
         <Text>Você está na área logada.</Text>
       </View>
