@@ -6,8 +6,8 @@ export default function AreaLogada({ navigation }) {
   // Acessando dados do usuario logado atraves do currentUser
   console.log(auth.currentUser);
 
-  // Extraindo a propriedade de email do currentUser
-  const { email } = auth.currentUser;
+  // Extraindo a propriedade de email e displayName do currentUser
+  const { email, displayName } = auth.currentUser;
 
   // Função de logout
   const logout = async () => {
@@ -22,7 +22,7 @@ export default function AreaLogada({ navigation }) {
   return (
     <View style={estilos.container}>
       <View style={estilos.topo}>
-        <Text style={estilos.bemVindo}>Bem-vindo(a)</Text>
+        <Text style={estilos.bemVindo}>Bem-vindo(a) {displayName} </Text>
         <Text>E-mail cadastrado: </Text>
         <Text style={{ fontWeight: "bold" }}>{email}</Text>
         <Button onPress={logout} title="Logout" color="#D35400" />
