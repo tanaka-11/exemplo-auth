@@ -39,7 +39,7 @@ export default function Cadastro({ navigation }) {
           text: "Ir para área logada",
           onPress: () => navigation.replace("AreaLogada"),
         },
-      ]);
+      ]); // Alert com botões personalizados
     } catch (error) {
       console.error(error.code);
       let mensagem;
