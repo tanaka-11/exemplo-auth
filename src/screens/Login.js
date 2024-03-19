@@ -31,6 +31,19 @@ export default function Login({ navigation }) {
       navigation.replace("AreaLogada"); // Encaminhando para area logada
     } catch (error) {
       console.error(error.code);
+      let mensagem;
+      switch (error.code) {
+        case "auth/invalid-credential":
+          mensagem = "Dados inválidos!";
+          break;
+        case "auth/invalid-email":
+          mensagem = "Endereço de e-mail inválido";
+          break;
+        default:
+          mensagem = "Houve um erro, tente novamente";
+          break;
+      }
+      Alert.alert("Ops!", mensagem);
     }
   };
 
