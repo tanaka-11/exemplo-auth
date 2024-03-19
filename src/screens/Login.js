@@ -11,7 +11,10 @@ import { useState } from "react";
 // Importação dos recursos de autenticação
 import { auth } from "../../firebase.config";
 // Importação da função de login com email e senha
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export default function Login({ navigation }) {
   // State de Email e Senha
@@ -27,7 +30,7 @@ export default function Login({ navigation }) {
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, senha); // Função com parametros de autenticação, email e senha
+      await signInWithEmailAndPassword(auth, email, senha); // Função do firebase com parametros de autenticação, email e senha
       navigation.replace("AreaLogada"); // Encaminhando para area logada
     } catch (error) {
       console.error(error.code);
@@ -47,6 +50,19 @@ export default function Login({ navigation }) {
     } // Tratativa de mensagem para usuario de erros possiveis
   };
 
+  // Função de recuperação de senha
+  const recuperarSenha = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email); // Função do firebase para recuperação de senha com parametros de autenticação e email
+      Alert.alert(
+        "Recuperar senha",
+        "E-mail enviado com link para recuperação"
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
@@ -55,14 +71,21 @@ export default function Login({ navigation }) {
           placeholder="E-mail"
           style={estilos.input}
         />
+
         <TextInput
           onChangeText={(valor) => setSenha(valor)}
           placeholder="Senha"
           style={estilos.input}
           secureTextEntry
         />
+
         <View style={estilos.botoes}>
           <Button onPress={login} title="Entre" color="green" />
+          <Button
+            onPress={recuperarSenha}
+            title="Esqueci a senha"
+            color="red"
+          />
         </View>
       </View>
     </View>
