@@ -13,6 +13,7 @@ export default function Cadastro({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  // Função de cadastrar
   const cadastrar = async () => {
     if (!email || !senha) {
       Vibration.vibrate(300);
@@ -25,7 +26,7 @@ export default function Cadastro({ navigation }) {
     <View style={estilos.container}>
       <View style={estilos.formulario}>
         <TextInput
-          onChangeText={(valor) => setEmail(valor)}
+          onChangeText={(valor) => setEmail(valor)} // Capturando texto digitado e o passando para o state
           placeholder="E-mail"
           style={estilos.input}
           keyboardType="email-address"
