@@ -1,4 +1,11 @@
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  TextInput,
+  Vibration,
+  View,
+} from "react-native";
 import { useState } from "react";
 
 // Importação dos recursos de autenticação
@@ -6,7 +13,7 @@ import { auth } from "../../firebase.config";
 // Importação da função de login com email e senha
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function Login() {
+export default function Login({ navigation }) {
   // State de Email e Senha
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -14,10 +21,17 @@ export default function Login() {
   // Função de Login
   const login = async () => {
     if (!email || !senha) {
+      Vibration.vibrate(300);
       Alert.alert("Ops!", "Preencha todos os campos");
       return;
     }
-    console.log(email, senha);
+
+    try {
+      await signInWithEmailAndPassword(auth, email, senha); // Função com parametros de autenticação, email e senha
+      navigation.replace("AreaLogada"); // Encaminhando para area logada
+    } catch (error) {
+      console.error(error.code);
+    }
   };
 
   return (
