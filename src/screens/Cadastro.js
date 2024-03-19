@@ -9,23 +9,35 @@ import {
 import { useState } from "react";
 
 import { auth } from "../../firebase.config"; // Recursos de autenticação
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Função do firebase para cadastrar usuario
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"; // Função do firebase para cadastrar usuario e atualizar perfil
 
 export default function Cadastro({ navigation }) {
-  // State de Email e Senha
+  // State de Nome, Email e Senha
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
   // Função de cadastrar
   const cadastrar = async () => {
-    if (!email || !senha) {
+    if (!email || !senha || !nome) {
       Vibration.vibrate(300);
       Alert.alert("Ops!", "Preencha todos os campos");
       return;
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, senha); // Função com parametros de autenticação, email e senha
+      // Função com parametros de autenticação, email, senha
+      const contaUsuario = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        senha
+      );
+
+      // Condicional para atualizar perfil do usuario atraves de um objeto com a propriedade que quer alterar
+      if (contaUsuario.user) {
+        await updateProfile(auth.currentUser, { displayName: nome });
+      }
+
       Alert.alert("Sucesso!", "Conta cadastrada com sucesso", [
         {
           style: "cancel",
@@ -64,6 +76,13 @@ export default function Cadastro({ navigation }) {
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
+        <TextInput
+          onChangeText={(valor) => setNome(valor)}
+          placeholder="Nome"
+          style={estilos.input}
+          keyboardType="default"
+        />
+
         <TextInput
           onChangeText={(valor) => setEmail(valor)} // Capturando texto digitado e o passando para o state
           placeholder="E-mail"
